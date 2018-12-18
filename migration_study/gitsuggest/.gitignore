@@ -1,0 +1,14 @@
+# Files to ignore.
+*.pyc
+.Python
+pip-selfcheck.json
+
+# Directories to ignore.
+bin/
+include/
+lib/
+git_suggest/__pycache__/
+
+# PyPi related directories to ignore.
+*.egg-info/
+dist/

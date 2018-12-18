@@ -1,0 +1,125 @@
+########### MSR ############################################
+#Paper04
+#Exception Evolution in Long-lived Java Systems
+
+query searchRepos01{
+  search(query:"language:java stars:>10 created:<2012-01-01", type:REPOSITORY, first:100){
+    nodes{
+      ... on Repository{
+        nameWithOwner
+        url
+      }
+    }
+  }
+}
+
+query commitDateByRepo($owner:String! $name:String!){
+  repository(owner:$owner, name:$name){
+    ref(qualifiedName:"master"){
+      target{
+        ... on Commit{
+          history(first:100){
+            nodes{
+              committedDate
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#Paper05
+#How Open Source Projects use 
+#Static Code Analysis Tools in Continuous Integration Pipelines
+
+query numStars($owner:String!, $name:String!){
+  repository(owner:$owner, name:$name){
+    stargazers{
+      totalCount
+    }
+  }
+}
+
+#Paper06
+#Extracting Build Changes with BUILDDIFF
+
+query selectRepos02{
+  search(query:"stars:>1000", type:REPOSITORY, first:100){
+  	nodes{
+    	... on Repository{
+      	nameWithOwner  
+      }  
+    } 
+  }
+}
+
+query totalCountCommitsByRepo($owner:String!, $name:String!){
+  repository(owner:$owner, name:$name){
+    ref(qualifiedName:"master"){
+          target{
+            ... on Commit{
+              history{
+                totalCount
+              }
+            }
+          }
+    		}
+  }
+}
+
+#Paper07
+#Bug Characteristics in Blockchain Systems: A Large-Scale Empirical Study
+
+query searchIssues($query:String!){
+  search(query:$query, type:ISSUE, first:100){
+    nodes{
+    	... on Issue{
+        title
+        body
+        createdAt
+      }
+    }
+  }
+}
+
+
+query getIssueComment($query2:String!){
+  search(type: ISSUE, query:$query2 , first: 1) {
+    nodes {
+      ... on Issue {
+        title
+        comments(first:100){
+              pageInfo{
+                hasNextPage
+                endCursor
+              }
+              nodes{
+                bodyText
+              }
+          }
+      }
+    }
+  }
+}
+
+query summaryRepo($owner:String!, $name:String!){
+  repository(owner:$owner, name:$name){
+    #releases
+    tags:refs(refPrefix:"refs/tags/") {
+      totalCount
+    }
+    primaryLanguage {
+      name
+    }
+    stargazers{
+      totalCount
+    }
+  }
+}
+
+{
+  "owner": "bitcoin", "name": "bitcoin",
+  "query":"repo:bitcoin/bitcoin state:closed created:>2016-11-07 label:bug",
+  "query2": "repo:bitcoin/bitcoin in:title Segmentation fault in util: ScheduleBatchPriority"
+}
