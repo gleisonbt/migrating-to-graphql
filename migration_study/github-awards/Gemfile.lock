@@ -103,6 +103,10 @@ GEM
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    graphql (1.12.24)
+    graphql-client (0.18.0)
+      activesupport (>= 3.0)
+      graphql
     hashie (3.5.7)
     hitimes (1.2.6)
     httparty (0.13.7)
@@ -170,7 +174,7 @@ GEM
       rack (>= 1.1, < 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.6.8)
+    rack (1.6.13)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.7.1)
@@ -299,6 +303,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.0.2)
   factory_girl_rails (~> 4.5.0)
   fakeredis (~> 0.5.0)
+  graphql-client
   httparty (~> 0.13.3)
   kaminari (~> 0.16.3)
   lograge (~> 0.3.4)
